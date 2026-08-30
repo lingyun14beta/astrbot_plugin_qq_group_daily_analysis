@@ -1,4 +1,4 @@
-<div align="center">
+﻿<div align="center">
 
 # 群聊日常分析插件
 
@@ -67,7 +67,7 @@ _✨ 一个基于 AstrBot 的智能群聊分析插件，支持 **OneBot** ( [Nap
   <tr>
     <td align="center" width="33.3%" valign="top">
       <p><b>Reverse: 1999 (重返未来：1999)</b></p>
-      <a href="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/reverse1999-demo.jpg"><img src="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/reverse1999-demo.jpg" alt="Reverse: 1999 示例" height="520"></a>
+      <a href="https://fastly.jsdelivr.net/gh/lingyun14beta/astrbot_plugin_qq_group_daily_analysis@149/assets/reverse1999-demo.jpg"><img src="https://fastly.jsdelivr.net/gh/lingyun14beta/astrbot_plugin_qq_group_daily_analysis@149/assets/reverse1999-demo.jpg" alt="Reverse: 1999 示例" height="520"></a>
     </td>
   </tr>
 </table>
