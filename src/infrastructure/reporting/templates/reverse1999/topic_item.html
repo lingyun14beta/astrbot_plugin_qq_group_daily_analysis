@@ -1,0 +1,153 @@
+{% if topics %}
+<style>
+    /* ===== 报纸头条档 ===== */
+    .r1999-news {
+        margin-top: 30px;
+    }
+
+    .r1999-rule {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 8px;
+    }
+
+    .r1999-rule-side {
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(178, 138, 79, 0.7));
+    }
+
+    .r1999-rule-side.r1999-rev {
+        background: linear-gradient(270deg, transparent, rgba(178, 138, 79, 0.7));
+    }
+
+    .r1999-rule-title {
+        font-family: var(--font-disp);
+        font-weight: 900;
+        font-size: 1.9rem;
+        letter-spacing: 0.18em;
+        color: var(--brass-2);
+        white-space: nowrap;
+    }
+
+    .r1999-rule-sub {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 14px;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        color: #8a9478;
+        margin-bottom: 20px;
+    }
+
+    .r1999-plate {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.28em;
+        color: #93a08a;
+        border: 1px solid rgba(178, 138, 79, 0.35);
+        padding: 2px 10px;
+        background: rgba(5, 8, 10, 0.25);
+    }
+
+    .r1999-plate::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--crimson);
+    }
+
+    .r1999-scribble {
+        font-family: 'Ma Shan Zheng', 'Special Elite', cursive;
+        font-size: 1.1rem;
+        color: var(--crimson-2);
+        transform: rotate(-4deg);
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    .r1999-topic {
+        display: flex;
+        gap: 18px;
+        padding: 20px 6px 22px;
+        border-bottom: 1px dashed rgba(178, 138, 79, 0.25);
+        break-inside: avoid;
+    }
+
+    .r1999-topic-no {
+        font-family: var(--font-mono);
+        font-weight: 700;
+        color: #f3e2c3;
+        background: var(--crimson);
+        width: 46px;
+        height: 46px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotate(-4deg);
+        box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.35);
+        font-size: 1.05rem;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .r1999-topic-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .r1999-topic-title {
+        font-family: var(--font-cn);
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 1.35;
+        color: #f0e6cb;
+    }
+
+    .r1999-topic-meta {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        color: #8f9c86;
+        margin: 8px 0 10px;
+    }
+
+    .r1999-topic-detail {
+        font-family: var(--font-type);
+        font-size: 1rem;
+        line-height: 1.85;
+        color: #d6c9a5;
+    }
+</style>
+
+<section class="r1999-news">
+    <div class="r1999-rule">
+        <div class="r1999-rule-side"></div>
+        <div class="r1999-rule-title">今日头条档</div>
+        <div class="r1999-rule-side r1999-rev"></div>
+    </div>
+    <div class="r1999-rule-sub">
+        <span class="r1999-plate">NO.04 · 今日头条</span>
+        <span>THE FRONT PAGE · 本期精选 {{ topics|length }} 条</span>
+        <span class="r1999-scribble">速记完毕。</span>
+    </div>
+
+    {% for topic in topics %}
+    <article class="r1999-topic">
+        <div class="r1999-topic-no">{{ "%02d"|format(topic.index) }}</div>
+        <div class="r1999-topic-body">
+            <div class="r1999-topic-title">{{ topic.topic.topic }}</div>
+            <div class="r1999-topic-meta">与谈人 {{ topic.contributors }} · 记录编号 {{ "%02d"|format(topic.index) }}-1999</div>
+            <div class="r1999-topic-detail">{{ topic.detail | safe }}</div>
+        </div>
+    </article>
+    {% endfor %}
+</section>
+{% endif %}

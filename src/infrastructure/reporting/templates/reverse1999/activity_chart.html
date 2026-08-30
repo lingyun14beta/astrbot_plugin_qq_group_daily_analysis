@@ -1,0 +1,103 @@
+{% if chart_data %}
+<style>
+    /* ===== CRT 频谱条形图 ===== */
+    .r1999-spectrum {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        height: 190px;
+        padding: 22px 2px 0 2px;
+        position: relative;
+    }
+
+    /* 底部刻度 */
+    .r1999-spectrum::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 26px;
+        height: 8px;
+        background-image: repeating-linear-gradient(90deg,
+                rgba(111, 227, 160, 0.18) 0 1px,
+                transparent 1px 24px);
+        pointer-events: none;
+    }
+
+    .r1999-spec-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
+        margin: 0 1px;
+        position: relative;
+    }
+
+    .r1999-spec-val {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        color: #79c99a;
+        margin-bottom: 4px;
+        white-space: nowrap;
+    }
+
+    .r1999-spec-bar {
+        width: 62%;
+        min-height: 3px;
+        border-radius: 2px 2px 0 0;
+        box-shadow: 0 0 10px rgba(111, 227, 160, 0.28);
+    }
+
+    .r1999-spec-hour {
+        margin-top: 7px;
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: #4e7a63;
+        letter-spacing: 0.02em;
+        width: 100%;
+        text-align: center;
+    }
+</style>
+
+<div class="r1999-spectrum">
+    {% for item in chart_data %}
+    {% set bar_percentage = item.percentage | float %}
+    {% if bar_percentage < 0 %}
+    {% set bar_percentage = 0 %}
+    {% elif bar_percentage > 100 %}
+    {% set bar_percentage = 100 %}
+    {% endif %}
+
+    {% set bar_bg = '#1d5c3d' %}
+    {% set bar_opacity = '0.55' %}
+    {% if item.count == 0 %}
+    {% set bar_bg = '#1d5c3d' %}
+    {% set bar_opacity = '0.22' %}
+    {% elif bar_percentage >= 70 %}
+    {% set bar_bg = '#8dffb0' %}
+    {% set bar_opacity = '1' %}
+    {% elif bar_percentage >= 40 %}
+    {% set bar_bg = '#56d686' %}
+    {% set bar_opacity = '1' %}
+    {% elif bar_percentage >= 15 %}
+    {% set bar_bg = '#2f9e63' %}
+    {% set bar_opacity = '0.95' %}
+    {% endif %}
+
+    <div class="r1999-spec-col">
+        {% if item.count > 0 %}
+        <div class="r1999-spec-val">{{ item.count }}</div>
+        {% endif %}
+        {% set bar_height = bar_percentage ~ '%' %}
+        {% if item.count == 0 %}
+        {% set bar_height = '3px' %}
+        {% endif %}
+        <div class="r1999-spec-bar"
+            style="height: {{ bar_height }}; background: {{ bar_bg }}; opacity: {{ bar_opacity }};"></div>
+        <div class="r1999-spec-hour">{{ "%02d" | format(item.hour) }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

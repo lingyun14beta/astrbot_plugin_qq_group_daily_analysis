@@ -1,0 +1,350 @@
+{% if titles %}
+<style>
+    /* ===== 模块标题分隔线（自包含） ===== */
+    .r1999-rule {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 8px;
+    }
+
+    .r1999-rule-side {
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(178, 138, 79, 0.7));
+    }
+
+    .r1999-rule-side.r1999-rev {
+        background: linear-gradient(270deg, transparent, rgba(178, 138, 79, 0.7));
+    }
+
+    .r1999-rule-title {
+        font-family: var(--font-disp);
+        font-weight: 900;
+        font-size: 1.9rem;
+        letter-spacing: 0.18em;
+        color: var(--brass-2);
+        white-space: nowrap;
+    }
+
+    .r1999-rule-sub {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 14px;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        color: #8a9478;
+        margin-bottom: 20px;
+    }
+
+    .r1999-plate {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.28em;
+        color: #93a08a;
+        border: 1px solid rgba(178, 138, 79, 0.35);
+        padding: 2px 10px;
+        background: rgba(5, 8, 10, 0.25);
+    }
+
+    .r1999-plate::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--crimson);
+    }
+
+    .r1999-scribble {
+        font-family: 'Ma Shan Zheng', 'Special Elite', cursive;
+        font-size: 1.1rem;
+        color: var(--crimson-2);
+        transform: rotate(-4deg);
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    /* 角色徽记（档案管理员） */
+    .r1999-emblem {
+        width: 84px;
+        height: 84px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        border: 3px solid var(--brass);
+        box-shadow:
+            0 0 0 5px rgba(178, 138, 79, 0.16),
+            2px 3px 0 rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .r1999-emblem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* ===== 居民档案（黑白登记照） ===== */
+    .r1999-portraits {
+        margin-top: 30px;
+    }
+
+    .r1999-portraits-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .r1999-file {
+        background: var(--paper);
+        color: var(--ink);
+        border-radius: 3px;
+        padding: 16px 18px 20px;
+        position: relative;
+        box-shadow: 5px 6px 0 rgba(0, 0, 0, 0.32);
+        break-inside: avoid;
+        overflow: hidden;
+    }
+
+    .r1999-file:nth-child(odd) {
+        transform: rotate(-0.5deg);
+    }
+
+    .r1999-file:nth-child(even) {
+        transform: rotate(0.5deg);
+    }
+
+    .r1999-file-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(36, 26, 15, 0.35);
+        padding-bottom: 7px;
+        margin-bottom: 13px;
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        color: var(--ink-2);
+    }
+
+    .r1999-file-stamp {
+        border: 1.5px solid var(--crimson);
+        color: var(--crimson);
+        padding: 1px 8px;
+        border-radius: 2px;
+        transform: rotate(-6deg);
+        font-family: var(--font-cn);
+        font-size: 0.78rem;
+        letter-spacing: 0.28em;
+        opacity: 0.9;
+    }
+
+    /* 拍立得照片框：黑白登记照 */
+    .r1999-file-photo {
+        float: left;
+        width: 84px;
+        height: 96px;
+        background: #fdf8ec;
+        padding: 5px 5px 5px 5px;
+        box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.2);
+        transform: rotate(-2.5deg);
+        margin: 0 14px 10px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .r1999-file-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(1) contrast(1.12) sepia(0.3);
+    }
+
+    .r1999-file-photo.fallback svg {
+        width: 46px;
+        height: 46px;
+        opacity: 0.55;
+    }
+
+    .r1999-file-name {
+        font-family: var(--font-cn);
+        font-weight: 700;
+        font-size: 1.3rem;
+        line-height: 1.2;
+        color: var(--ink);
+    }
+
+    .r1999-file-subno {
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        color: var(--ink-2);
+        margin-top: 4px;
+    }
+
+    .r1999-file-badges {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .r1999-badge-title {
+        background: var(--crimson);
+        color: #f3e2c3;
+        font-family: var(--font-cn);
+        letter-spacing: 0.14em;
+        padding: 3px 12px;
+        border-radius: 3px;
+        transform: rotate(-2deg);
+        font-size: 0.92rem;
+        box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.22);
+    }
+
+    /* MBTI 邮戳 */
+    .r1999-badge-mbti {
+        border: 2px solid var(--ink);
+        border-radius: 50%;
+        width: 72px;
+        height: 72px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        color: var(--ink);
+        transform: rotate(8deg);
+        box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.15);
+        line-height: 1.15;
+    }
+
+    .r1999-badge-mbti .mbti-code {
+        font-size: 0.74rem;
+        letter-spacing: 0.06em;
+    }
+
+    .r1999-badge-mbti .mbti-name {
+        font-size: 0.5rem;
+        letter-spacing: 0.08em;
+        margin-top: 3px;
+        font-weight: 400;
+    }
+
+    /* 证词框 */
+    .r1999-file-reason {
+        clear: both;
+        background: #f4ebd2;
+        border: 1px dashed rgba(36, 26, 15, 0.5);
+        padding: 14px 14px 12px;
+        font-family: var(--font-type);
+        font-size: 0.97rem;
+        line-height: 1.8;
+        margin-top: 12px;
+        position: relative;
+        color: #3a2d18;
+        min-height: 60px;
+    }
+
+    .r1999-file-reason::before {
+        content: "证词";
+        position: absolute;
+        top: -10px;
+        left: 12px;
+        background: #f4ebd2;
+        padding: 0 8px;
+        font-family: var(--font-cn);
+        color: var(--crimson);
+        font-size: 0.8rem;
+        letter-spacing: 0.25em;
+    }
+
+    /* 人格背景水印 */
+    .r1999-file-water {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        width: 40%;
+        max-height: 78%;
+        object-fit: contain;
+        filter: sepia(0.75) contrast(1.15);
+        mix-blend-mode: multiply;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .r1999-file-reason,
+    .r1999-file-name,
+    .r1999-file-badges,
+    .r1999-file-head {
+        position: relative;
+        z-index: 1;
+    }
+</style>
+
+<section class="r1999-portraits">
+    <div class="r1999-rule">
+        <div class="r1999-emblem">
+            <img
+                src="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/reverse1999/vertin_icon.png"
+                alt="档案管理员">
+        </div>
+        <div class="r1999-rule-side"></div>
+        <div class="r1999-rule-title">居民档案</div>
+        <div class="r1999-rule-side r1999-rev"></div>
+    </div>
+    <div class="r1999-rule-sub">
+        <span class="r1999-plate">NO.05 · 居民档案</span>
+        <span>RESIDENT DOSSIERS · 已归档 {{ titles|length }} 份</span>
+        <span class="r1999-scribble">人人有份。</span>
+    </div>
+
+    <div class="r1999-portraits-grid">
+        {% for title in titles %}
+        <article class="r1999-file">
+            <div class="r1999-file-head">
+                <span>FILE No. {{ "%02d"|format(loop.index) }}</span>
+                <span class="r1999-file-stamp">已归档</span>
+            </div>
+
+            {% if title.avatar_data %}
+            <div class="r1999-file-photo">
+                <img src="{{ title.avatar_data }}" alt="头像">
+            </div>
+            {% else %}
+            <div class="r1999-file-photo fallback">
+                <svg viewBox="0 0 24 24" fill="#4b3d26">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+            </div>
+            {% endif %}
+
+            <div class="r1999-file-name">{{ title.name }}</div>
+            <div class="r1999-file-subno">档案号 {{ "%02d"|format(loop.index) }}-1999 · 状态 存活</div>
+
+            <div class="r1999-file-badges">
+                <span class="r1999-badge-title">{{ title.title }}</span>
+                <span class="r1999-badge-mbti">
+                    <span class="mbti-code">{{ title.profile_display or title.mbti }}</span>
+                    <span class="mbti-name">TYPE</span>
+                </span>
+            </div>
+
+            <div class="r1999-file-reason">{{ title.reason }}</div>
+
+            {% if title.profile_image %}
+            <img class="r1999-file-water" src="{{ title.profile_image }}" alt=""
+                style="opacity: {{ title.profile_image_opacity or 0.12 }};">
+            {% endif %}
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}

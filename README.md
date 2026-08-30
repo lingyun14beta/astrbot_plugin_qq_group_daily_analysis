@@ -64,6 +64,12 @@ _✨ 一个基于 AstrBot 的智能群聊分析插件，支持 **OneBot** ( [Nap
       <a href="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/BlueArchive-demo.jpg"><img src="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/BlueArchive-demo.jpg" alt="BlueArchive 示例" height="520"></a>
     </td>
   </tr>
+  <tr>
+    <td align="center" width="33.3%" valign="top">
+      <p><b>Reverse: 1999 (重返未来：1999)</b></p>
+      <a href="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/reverse1999-demo.jpg"><img src="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/reverse1999-demo.jpg" alt="Reverse: 1999 示例" height="520"></a>
+    </td>
+  </tr>
 </table>
 
 ### 2. **每日群漫画**：将群分析结果改编为趣味连环漫画，支持图生图参考图和独立绘图服务

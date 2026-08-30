@@ -41,6 +41,7 @@ class HTMLTemplates:
         "hack": "黑客赛博 (Hack)",
         "BlueArchive": "蔚蓝档案 (BlueArchive)",
         "simple": "极简黑白 (Simple)",
+        "reverse1999": "重返未来：1999 (Reverse: 1999)",
     }
 
     def _get_env_sync(self, template_theme: str | None = None) -> Environment:

@@ -1,0 +1,285 @@
+{% if quotes %}
+<style>
+    /* ===== 模块标题分隔线（自包含） ===== */
+    .r1999-rule {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 8px;
+    }
+
+    .r1999-rule-side {
+        flex: 1;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(178, 138, 79, 0.7));
+    }
+
+    .r1999-rule-side.r1999-rev {
+        background: linear-gradient(270deg, transparent, rgba(178, 138, 79, 0.7));
+    }
+
+    .r1999-rule-title {
+        font-family: var(--font-disp);
+        font-weight: 900;
+        font-size: 1.9rem;
+        letter-spacing: 0.18em;
+        color: var(--brass-2);
+        white-space: nowrap;
+    }
+
+    .r1999-rule-sub {
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        gap: 14px;
+        text-align: center;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        color: #8a9478;
+        margin-bottom: 20px;
+    }
+
+    .r1999-plate {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--font-mono);
+        font-size: 0.62rem;
+        letter-spacing: 0.28em;
+        color: #93a08a;
+        border: 1px solid rgba(178, 138, 79, 0.35);
+        padding: 2px 10px;
+        background: rgba(5, 8, 10, 0.25);
+    }
+
+    .r1999-plate::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--crimson);
+    }
+
+    .r1999-scribble {
+        font-family: 'Ma Shan Zheng', 'Special Elite', cursive;
+        font-size: 1.1rem;
+        color: var(--crimson-2);
+        transform: rotate(-4deg);
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    /* 角色徽记（电台台柱） */
+    .r1999-emblem {
+        width: 84px;
+        height: 84px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        border: 3px solid var(--brass);
+        box-shadow:
+            0 0 0 5px rgba(178, 138, 79, 0.16),
+            2px 3px 0 rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+
+    .r1999-emblem img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* ===== 黑胶唱片转录 ===== */
+    .r1999-records {
+        margin-top: 30px;
+    }
+
+    .r1999-record {
+        display: flex;
+        gap: 18px;
+        align-items: stretch;
+        margin-bottom: 16px;
+        break-inside: avoid;
+    }
+
+    /* 黑胶唱片 */
+    .r1999-disc {
+        width: 96px;
+        height: 96px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        position: relative;
+        align-self: center;
+        background:
+            radial-gradient(circle at 50% 50%, transparent 0 4px, #060504 4px 6.5px, transparent 6.5px 9px),
+            repeating-radial-gradient(circle at 50% 50%, #221d18 0 2px, #100e0b 2px 4px);
+        background-color: #0e0c0a;
+        box-shadow:
+            inset -5px -7px 14px rgba(255, 255, 255, 0.07),
+            inset 5px 7px 16px rgba(0, 0, 0, 0.85),
+            0 5px 12px rgba(0, 0, 0, 0.55);
+    }
+
+    /* 唱片中心黄铜标 */
+    .r1999-disc::before {
+        content: "";
+        position: absolute;
+        inset: 50%;
+        width: 34px;
+        height: 34px;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: radial-gradient(circle at 38% 32%, #d9b877, #8a6a38 75%);
+    }
+
+    .r1999-disc-lab {
+        position: absolute;
+        inset: 50%;
+        transform: translate(-50%, -50%);
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        font-weight: 700;
+        color: #241a0f;
+        z-index: 1;
+    }
+
+    /* 唱机臂 */
+    .r1999-tonearm {
+        width: 12px;
+        flex-shrink: 0;
+        align-self: center;
+        height: 84px;
+        border-left: 3px solid var(--brass);
+        transform: rotate(14deg);
+        position: relative;
+        opacity: 0.85;
+    }
+
+    .r1999-tonearm::before {
+        content: "";
+        position: absolute;
+        left: -7px;
+        bottom: -4px;
+        width: 9px;
+        height: 5px;
+        background: var(--brass-2);
+    }
+
+    .r1999-tonearm::after {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: -6px;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: var(--brass);
+    }
+
+    /* 封套卡片 */
+    .r1999-sleeve {
+        flex: 1;
+        min-width: 0;
+        background: #17221c;
+        border: 1px solid #2c4a3d;
+        border-radius: 8px;
+        padding: 13px 18px 14px;
+        position: relative;
+    }
+
+    .r1999-sleeve::before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: 12px;
+        right: 12px;
+        height: 2px;
+        background: rgba(111, 227, 160, 0.12);
+    }
+
+    .r1999-sleeve-head {
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.66rem;
+        letter-spacing: 0.16em;
+        color: #7fa391;
+        margin-bottom: 9px;
+    }
+
+    .r1999-sleeve-quote {
+        font-family: var(--font-disp);
+        font-weight: 700;
+        font-size: 1.22rem;
+        line-height: 1.6;
+        color: #f2e7c9;
+    }
+
+    .r1999-sleeve-sender {
+        font-family: var(--font-cn);
+        color: var(--brass-2);
+        font-size: 0.92rem;
+        margin-top: 5px;
+    }
+
+    .r1999-sleeve-note {
+        margin-top: 10px;
+        border-top: 1px dashed rgba(178, 138, 79, 0.3);
+        padding-top: 9px;
+        font-family: var(--font-type);
+        font-size: 0.9rem;
+        line-height: 1.75;
+        color: #c9bd9c;
+    }
+
+    .r1999-sleeve-note-label {
+        color: var(--crimson-2);
+        font-family: var(--font-mono);
+        letter-spacing: 0.14em;
+        font-size: 0.72rem;
+        margin-right: 6px;
+    }
+</style>
+
+<section class="r1999-records">
+    <div class="r1999-rule">
+        <div class="r1999-emblem">
+            <img
+                src="https://fastly.jsdelivr.net/gh/SXP-Simon/astrbot_plugin_qq_group_daily_analysis@main/assets/reverse1999/sonetto_icon.png"
+                alt="驻馆诗人">
+        </div>
+        <div class="r1999-rule-side"></div>
+        <div class="r1999-rule-title">金句留声</div>
+        <div class="r1999-rule-side r1999-rev"></div>
+    </div>
+    <div class="r1999-rule-sub">
+        <span class="r1999-plate">NO.06 · 金句留声</span>
+        <span>R-1999 电台 · A 面收录 {{ quotes|length }} 条</span>
+        <span class="r1999-scribble">听，别停。</span>
+    </div>
+
+    {% for quote in quotes %}
+    <div class="r1999-record">
+        <div class="r1999-disc">
+            <div class="r1999-disc-lab">{{ "%02d"|format(loop.index) }}</div>
+        </div>
+        <div class="r1999-tonearm"></div>
+        <div class="r1999-sleeve">
+            <div class="r1999-sleeve-head">
+                <span>TRACK {{ "%02d"|format(loop.index) }} · A 面</span>
+                <span>R-1999 · 33⅓ RPM</span>
+            </div>
+            <div class="r1999-sleeve-quote">{{ quote.content }}</div>
+            <div class="r1999-sleeve-sender">—— {{ quote.sender }}</div>
+            <div class="r1999-sleeve-note">
+                <span class="r1999-sleeve-note-label">AI 旁注</span>{{ quote.reason | safe }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endif %}
