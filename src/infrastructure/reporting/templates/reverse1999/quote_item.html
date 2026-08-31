@@ -1,4 +1,4 @@
-﻿{% if quotes %}
+{% if quotes %}
 <style>
     /* ===== 模块标题分隔线（自包含） ===== */
     .r1999-rule {
@@ -242,6 +242,13 @@
         letter-spacing: 0.14em;
         font-size: 0.72rem;
         margin-right: 6px;
+    }
+
+    /* AI 旁注胶囊头像：暖调胶片滤镜，避免黑白默认头像突兀 */
+    .r1999-sleeve-note .user-capsule-avatar,
+    .r1999-sleeve-note img[data-avatar-ref] {
+        filter: sepia(0.5) saturate(2.6) hue-rotate(-8deg) contrast(1.06);
+        box-shadow: 0 0 0 1px rgba(217, 184, 119, 0.4);
     }
 </style>
 

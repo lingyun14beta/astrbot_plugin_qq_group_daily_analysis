@@ -85,8 +85,16 @@ class TemplateCommandService:
         available_templates: list[str],
         current_template: str,
         bot_id: str,
+        labels: dict[str, str] | None = None,
     ) -> Nodes:
-        """构建模板预览的合并消息节点。"""
+        """构建模板预览的合并消息节点。
+
+        Args:
+            available_templates: 可用模板名列表。
+            current_template: 当前使用的模板名。
+            bot_id: 机器人 ID。
+            labels: 模板名到中文描述标签的映射（如 {"reverse1999": "重返未来：1999"}）。
+        """
         node_list = []
 
         header_content = [
@@ -103,8 +111,9 @@ class TemplateCommandService:
                 if index < len(self._CIRCLE_NUMBERS)
                 else f"({index + 1})"
             )
+            display_label = (labels or {}).get(template_name, template_name)
 
-            node_content = [Plain(f"{num_label} {template_name}{current_mark}")]
+            node_content = [Plain(f"{num_label} {display_label}{current_mark}")]
             preview_image_path = self.resolve_template_preview_path(template_name)
             if preview_image_path:
                 node_content.append(Image.fromFileSystem(preview_image_path))

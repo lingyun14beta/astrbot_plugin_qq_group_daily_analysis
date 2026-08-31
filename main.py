@@ -1447,6 +1447,7 @@ class GroupDailyAnalysis(Star):
             available_templates=available_templates,
             current_template=current_template,
             bot_id=bot_id,
+            labels=self.report_generator.html_templates.KNOWN_TEMPLATE_NAMES,
         )
         yield event.chain_result([preview_nodes])
 
