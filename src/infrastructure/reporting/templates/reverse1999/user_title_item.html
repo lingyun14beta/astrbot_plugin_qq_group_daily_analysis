@@ -188,54 +188,46 @@
         margin-top: 4px;
     }
 
-    .r1999-file-badges {
-        margin-top: 10px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-    }
-
-    .r1999-badge-title {
-        background: var(--crimson);
-        color: #f3e2c3;
-        font-family: var(--font-cn);
-        letter-spacing: 0.14em;
-        padding: 3px 12px;
-        border-radius: 3px;
-        transform: rotate(-2deg);
-        font-size: 0.92rem;
-        box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.22);
-    }
-
-    /* MBTI 邮戳 */
-    .r1999-badge-mbti {
-        border: 2px solid var(--ink);
-        border-radius: 50%;
-        width: 72px;
-        height: 72px;
+    /* 档案字段行（称号 / 人格） */
+    .r1999-file-fields {
+        margin-top: 12px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        gap: 8px;
+    }
+
+    .r1999-field-row {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        min-width: 0;
+    }
+
+    .r1999-field-key {
+        flex-shrink: 0;
         font-family: var(--font-mono);
+        font-size: 0.56rem;
+        letter-spacing: 0.12em;
+        color: var(--crimson);
+        font-weight: 700;
+    }
+
+    .r1999-field-val {
+        font-family: var(--font-cn);
+        font-size: 0.98rem;
         font-weight: 700;
         color: var(--ink);
-        transform: rotate(8deg);
-        box-shadow: 1px 2px 0 rgba(0, 0, 0, 0.15);
-        line-height: 1.15;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        max-width: 78%;
+        overflow: visible;
     }
 
-    .r1999-badge-mbti .mbti-code {
-        font-size: 0.74rem;
-        letter-spacing: 0.06em;
-    }
-
-    .r1999-badge-mbti .mbti-name {
-        font-size: 0.5rem;
-        letter-spacing: 0.08em;
-        margin-top: 3px;
-        font-weight: 400;
+    .r1999-field-line {
+        flex: 1;
+        border-bottom: 1px dashed rgba(36, 26, 15, 0.45);
+        transform: translateY(-4px);
+        min-width: 24px;
     }
 
     /* 证词框 */
@@ -282,7 +274,7 @@
 
     .r1999-file-reason,
     .r1999-file-name,
-    .r1999-file-badges,
+    .r1999-file-fields,
     .r1999-file-head {
         position: relative;
         z-index: 1;
@@ -329,12 +321,17 @@
             <div class="r1999-file-name">{{ title.name }}</div>
             <div class="r1999-file-subno">档案号 {{ "%02d"|format(loop.index) }}-1999 · 状态 存活</div>
 
-            <div class="r1999-file-badges">
-                <span class="r1999-badge-title">{{ title.title }}</span>
-                <span class="r1999-badge-mbti">
-                    <span class="mbti-code">{{ title.profile_display or title.mbti }}</span>
-                    <span class="mbti-name">TYPE</span>
-                </span>
+            <div class="r1999-file-fields">
+                <div class="r1999-field-row">
+                    <span class="r1999-field-key">称号 / TITLE</span>
+                    <span class="r1999-field-val">{{ title.title }}</span>
+                    <span class="r1999-field-line"></span>
+                </div>
+                <div class="r1999-field-row">
+                    <span class="r1999-field-key">人格 / TYPE</span>
+                    <span class="r1999-field-val">{{ title.profile_display or title.mbti }}</span>
+                    <span class="r1999-field-line"></span>
+                </div>
             </div>
 
             <div class="r1999-file-reason">{{ title.reason }}</div>
